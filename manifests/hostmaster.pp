@@ -19,7 +19,7 @@ class aegir::hostmaster (
   $drush_version = ''
 ) {
   include apt
-  #include stdlib
+  include stdlib
   apt::source { 'aegir':
     location => 'http://debian.aegirproject.org',
     release  => $release,
@@ -37,16 +37,16 @@ class aegir::hostmaster (
     "${package_name}-hostmaster aegir/db_user string ${database['user']}"
   ]
   if $email {
-    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/email string ${email}"]
+    concat($debconf_settings, ["${package_name}-hostmaster aegir/email string ${email}"])
   }
   if $makefile {
-    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/makefile string ${makefile}"]
+    concat($debconf_settings, ["${package_name}-hostmaster aegir/makefile string ${makefile}"])
   }
   if $working_copy {
-    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/working-copy boolean true"]
+    concat($debconf_settings, ["${package_name}-hostmaster aegir/working-copy boolean true"])
   }
   if $drush_version {
-    $debconf_settings = $debconf_settings + ["aegir${version}-provision aegir/drush_version string ${drush_version}"]
+    concat($debconf_settings, ["aegir${version}-provision aegir/drush_version string ${drush_version}"])
   }
   file { '/etc/dpkg/aegir.response':
     ensure  => 'file',
