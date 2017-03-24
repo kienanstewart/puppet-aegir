@@ -37,16 +37,16 @@ class aegir::hostmaster (
     "${package_name}-hostmaster aegir/db_user string ${database['user']}"
   ]
   if $email {
-    $debconf_settings += "${package_name}-hostmaster aegir/email string ${email}"
+    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/email string ${email}"]
   }
   if $makefile {
-    $debconf_settings += "${package_name}-hostmaster aegir/makefile string ${makefile}"
+    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/makefile string ${makefile}"]
   }
   if $working_copy {
-    $debconf_settings += "${package_name}-hostmaster aegir/working-copy boolean true"
+    $debconf_settings = $debconf_settings + ["${package_name}-hostmaster aegir/working-copy boolean true"]
   }
   if $drush_version {
-    $debconf_settings += "aegir${version}-provision aegir/drush_version string ${drush_version}"
+    $debconf_settings = $debconf_settings + ["aegir${version}-provision aegir/drush_version string ${drush_version}"]
   }
   file { '/etc/dpkg/aegir.response':
     ensure  => 'file',
