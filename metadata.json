@@ -1,0 +1,27 @@
+{
+    "name": "aegir",
+    "version": "0.0.2",
+    "author": "Kienan Stewart",
+    "license": "GPL-3.0+",
+    "summary": "A module for installing aegir",
+    "source": "https://gitlab.com/kienan/puppet-aegir"
+    "project_page": "https://gitlab.com/kienan/puppet-aegir",
+    "issues_url": "https://gitlab.com/kienan/puppet-aegir/issues",
+    "tags": ["aegir", "drupal", "hosting"],
+    "operatingsystem_support": [
+        {
+            "operatingsystem": "Debian",
+            "operatingsystemrelease": [ "jessie", "stretch"]
+        }
+    ],
+    "dependencies": [
+        { "name": "puppetlabs/apt", "version_requirement": ">= 2.3.0 < 3.0.0"},
+        { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.13.1 < 5.0.0"}
+    ],
+    "requirements": [
+        {
+            "name": "puppet",
+            "version_requirement": ">= 4.0.0 < 5.0.0"
+        }
+    ]
+}
