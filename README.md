@@ -6,7 +6,7 @@ This module is intended to install aegir simply.
 
 ## License
 
-    Copyright (C) <year>  <name of author>
+    Copyright (C) 2017 Kienan Stewart
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,23 +21,42 @@ This module is intended to install aegir simply.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 ## Requirements
 
 Modules from forge.puppet.com:
 
-* puppetlabs-stdlib (tested with 4.13.1)
+* puppetlabs-stdlib (tested with 4.15.0)
 * puppetlabs-apt (tested with 2.3.0)
 
-Currently only supports installation through debian packages.
+Operating systems: Debian derivatives.
+
+Puppet: 4.x
 
 ## Setup
 
 Nothing special.
 
-## Usage
+## Limitations
 
-@TODO
+* Currently only supports apache
+* Depends on the the aegir${version} package to correctly install dependencies
+
+## Example Usage
+
+### Install a hostmaster
+
+```puppet
+# Assumes mysql or mariadb is installed
+# and that there is a user aegir_root
+# with all grants etc permissions on *.*
+class { '::aegir::hostmaster': {
+  database => {
+    host     => 'localhost',
+    user     => 'aegir_root',
+    password => 'examplepassword'
+  }
+}
+```
 
 ## Reference
 
