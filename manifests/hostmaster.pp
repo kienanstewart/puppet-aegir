@@ -52,6 +52,21 @@ class aegir::hostmaster (
     ensure  => 'file',
     content => join($debconf_settings, "\n")
   }
+  if ($server == 'nginx') {
+    # Install nginx and phpX-fpm before running the aegir install.
+    $nginx_packages = ['nginx']
+    case $facts['os']['lsb']['distcodename'] {
+      'wheezy', 'jessie': { concat($nginx_packages, ['php5-fpm']) }
+      default: { concat($nginx_packages, ['php7.0-fpm']) }
+    }
+    ensure_packages(
+      $nginx_packages,
+      {
+        'ensure' => 'present',
+        'before' => Package['aegir'],
+      }
+    )
+  }
   package { 'aegir':
     ensure       => 'installed',
     name         => $package_name,
